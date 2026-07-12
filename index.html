@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دعوة زفاف: غانم & أمنية</title>
-    <!-- الخطوط الملكية المستخدمة في التصميم -->
+    <!-- خطوط جوجل الشيك المتناسقة مع التصميم -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary-dark: #2c1a19;
             --gold-solid: #bfa15f;
-            --bg-floral: #fdf5f2; /* نفس الدرجة الروز الناعمة والأوف وايت اللي في الصورة */
             --whatsapp-color: #25d366;
         }
 
@@ -23,7 +22,7 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f7f3ed;
+            background-color: #f5f0eb;
             margin: 0;
             padding: 0;
             display: flex;
@@ -107,6 +106,336 @@
             position: absolute;
             right: 18px;
             top: 55%;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+        }
+
+        .door-knob::after {
+            content: '✊';
+            font-size: 15px;
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            animation: knockBounce 1s infinite;
+        }
+
+        @keyframes knockBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hint-text {
+            color: #fdfbf7;
+            margin-top: 35px;
+            font-size: 1.1rem;
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* --- الكارت الداخلي (مطابق للصورة بالظبط كخلفية) --- */
+        .card-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: all 1s ease 0.2s;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .card-container.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .card {
+            /* هنا السحر: استعمال الصورة الأصلية كخلفية كاملة ومطابقة */
+            background: url('card-bg.jpg') no-repeat center center;
+            background-size: cover;
+            width: 100%;
+            max-width: 430px;
+            /* نسبة الطول للعرض مطابقة تماماً لأبعاد كروت الأفراح الفاخرة */
+            height: 780px; 
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* لترك مساحة للتصميم الأصلي وتكديس الأزرار تحت بشكل شيك */
+        }
+
+        /* حاوية الأزرار التفاعلية والعداد التنازلي مدمجة بجمال في الأسفل */
+        .interactive-area {
+            background: rgba(255, 252, 248, 0.92); /* أرضية شبه شفافة بلون كريمي للحفاظ على شياكة الورد الخلفي */
+            border: 1px solid rgba(191, 161, 95, 0.3);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        /* العداد التنازلي التفاعلي */
+        .countdown-title {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .countdown-item {
+            background: #ffffff;
+            border: 1px solid #e2d1bc;
+            padding: 5px;
+            border-radius: 6px;
+            min-width: 52px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            color: #777;
+        }
+
+        /* أزرار موقع القاعة والتقويم */
+        .utility-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .util-btn {
+            flex: 1;
+            padding: 9px;
+            border: 1px solid var(--gold-solid);
+            border-radius: 20px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #2c1a19;
+            background: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .util-btn:hover {
+            background: var(--primary-dark);
+            color: #fff;
+            border-color: var(--primary-dark);
+        }
+
+        /* حقل زوار واتساب الفاخر */
+        .rsvp-section input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-align: right;
+            outline: none;
+            background: #fff;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25d366 0%, #1ebd58 100%);
+            color: #fff;
+            border: none;
+            padding: 11px;
+            font-size: 0.95rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(37,211,102,0.2);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .music-btn {
+            background: transparent;
+            color: #888;
+            border: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 5px;
+            text-decoration: underline;
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ١. شاشة البوابة التفاعلية للـ 3D Opening -->
+    <div class="door-screen" id="doorScreen">
+        <div class="door-title">فرحة غانم & أمنية بتناديك.. ✨</div>
+        <div class="door-frame" id="doorFrame">
+            <div class="door" id="mainDoor">
+                <div class="door-knob"></div>
+            </div>
+        </div>
+        <div class="hint-text">اضغط على البوابة الملكية للدخول واكتشاف الفرحة 🚪✨</div>
+    </div>
+
+    <!-- ٢. كارت الدعوة بمظهر خلفية الصورة الأصلية تماماً بالملّي -->
+    <div class="card-container" id="cardContainer">
+        <div class="card">
+            
+            <!-- المنطقة التفاعلية السفلية المدمجة بذكاء فوق خلفية الكارت -->
+            <div class="interactive-area">
+                
+                <!-- متبقي على الفرح (عداد تنازلي) -->
+                <div class="countdown-title">⏳ متبقي على ليلة العمر المتظافرة:</div>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">يوم</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">ساعة</span></div>
+                    <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">دقيقة</span></div>
+                </div>
+
+                <!-- أزرار الخريطة والتقويم الذكي -->
+                <div class="utility-buttons">
+                    <a href="https://maps.app.goo.gl/YF9dQeiMW2N1r1J47?g_st=ac" target="_blank" class="util-btn">
+                        📍 لوكيشن القاعة
+                    </a>
+                    <button id="addToCalendar" class="util-btn">
+                        🔔 حفظ بالتقويم
+                    </button>
+                </div>
+
+                <!-- تأكيد الحضور المربوط فوراً بالواتساب -->
+                <div class="rsvp-section">
+                    <input type="text" id="visitorName" placeholder="اكتب اسمك الكريم لتأكيد حضورك...">
+                    <button class="whatsapp-btn" id="sendWhatsapp">تأكيد الحضور عبر الواتساب</button>
+                </div>
+
+            </div>
+
+            <!-- زر تشغيل وإيقاف الأغنية الأصلي -->
+            <center>
+                <button class="music-btn" id="playBtn">⏸️ إيقاف لحن الفرح (هو حبيبي)</button>
+            </center>
+            
+            <audio id="bgMusic" loop>
+                <source src="asala-howa-habibi.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        const doorFrame = document.getElementById('doorFrame');
+        const mainDoor = document.getElementById('mainDoor');
+        const doorScreen = document.getElementById('doorScreen');
+        const cardContainer = document.getElementById('cardContainer');
+        const music = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        const sendWhatsapp = document.getElementById('sendWhatsapp');
+        const addToCalendar = document.getElementById('addToCalendar');
+
+        // كود تشغيل البوابة
+        doorFrame.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mainDoor.classList.add('open');
+            music.play().catch(err => console.log("تطلب تفاعل صوتي"));
+
+            setTimeout(() => {
+                doorScreen.classList.add('fade-out');
+                cardContainer.classList.add('show');
+                document.body.style.overflow = 'auto';
+            }, 400);
+        });
+
+        // تحكم الموسيقى
+        playBtn.addEventListener('click', function() {
+            if (music.paused) {
+                music.play().then(() => playBtn.innerHTML = "⏸️ إيقاف لحن الفرح (هو حبيبي)");
+            } else {
+                music.pause();
+                playBtn.innerHTML = "🎵 تشغيل لحن الفرح (هو حبيبي)";
+            }
+        });
+
+        // تأكيد الحضور عبر الواتس آب للرقم المخصص
+        sendWhatsapp.addEventListener('click', function() {
+            const visitorName = document.getElementById('visitorName').value.trim();
+            const phoneNumber = "201013403675";
+            
+            if (visitorName === "") {
+                alert("برجاء تسجيل اسمك الكريم أولاً لتأكيد حضورك ومشاركتنا فرحتنا! ✍️✨");
+                return;
+            }
+
+            const message = `السلام عليكم ورحمة الله وبركاته،\n\nأنا: *${visitorName}*\nيسعدني جداً تلبية الدعوة وتأكيد حضوري لحفل زفاف *غانم & أمنية* يوم الجمعة 14/8/2026 في قاعة البانسيه للاحتفالات.\n\nألف مبروك ودامت دياركم عامرة بالأفراح! 🤵‍♂️👰‍♀️✨`;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // حفظ الموعد بالتقويم الذكي (الجمعة 14 أغسطس 2026 الساعة 9 م بمصر)
+        addToCalendar.addEventListener('click', function() {
+            const title = encodeURIComponent("حفل زفاف غانم & أمنية 🤵‍♂️👰‍♀️");
+            const details = encodeURIComponent("يسعدنا ويشرفنا حضوركم حفل زفافنا لتكتمل فرحتنا بكم. ودامت دياركم عامرة بالأفراح ✨");
+            const location = encodeURIComponent("قاعة البانسيه للاحتفالات");
+            const dates = "20260814T190000Z/20260814T220000Z";
+
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sf=true&output=xml`;
+            window.open(calendarUrl, '_blank');
+        });
+
+        // العداد التنازلي ليوم 14 أغسطس 2026 الساعة 21:00
+        const weddingDate = new Date("August 14, 2026 21:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<b style='color:var(--gold-solid); font-size:1.1rem;'>🔥 الفرح شغال الآن.. منورين يا حبايب! 🔥</b>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
             box-shadow: 0 6px 12px rgba(0,0,0,0.5);
             display: flex;
             justify-content: center;
