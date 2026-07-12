@@ -14,6 +14,7 @@
             --primary-dark: #2c1a19;
             --gold-solid: #bfa15f;
             --whatsapp-color: #25d366;
+            --rose-petal: #ffb7b2;
         }
 
         *, *::before, *::after {
@@ -135,7 +136,7 @@
             50% { opacity: 1; }
         }
 
-        /* --- الكارت الداخلي (خلفية الصورة الأصلية) --- */
+        /* --- الكارت الداخلي بخلفية ديجيتال مميزة وأنيميشن ورود متحركة --- */
         .card-container {
             width: 100%;
             display: flex;
@@ -155,40 +156,141 @@
         }
 
         .card {
-            background: url('card-bg.jpg') no-repeat center center;
-            background-size: cover;
+            background: linear-gradient(180deg, #fffcfb 0%, #fff3f0 50%, #fffcfb 100%);
             width: 100%;
             max-width: 430px;
-            height: 820px; /* زودنا الارتفاع بسيط عشان يستوعب الصورة بقمة الراحة والشياكة */
+            height: 820px; 
             position: relative;
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
             padding: 20px 25px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end; 
+            justify-content: flex-end;
+            border: 10px double var(--gold-solid);
+            overflow: hidden;
         }
 
-        /* إطار صورة العرسان الملكي الفاخر */
+        /* أنيميشن أوراق الورد المتساقطة الناعمة في الخلفية */
+        .petals-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            background-color: var(--rose-petal);
+            border-radius: 150px 0 150px 150px;
+            opacity: 0.7;
+            animation: floatPetal 10s linear infinite;
+        }
+
+        @keyframes floatPetal {
+            0% {
+                transform: translateY(-20px) translateX(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(400px) translateX(50px) rotate(180deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(840px) translateX(-30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* توزيع عشوائي للبتلات بأنيميشن مختلف */
+        .petal:nth-child(1) { width: 15px; height: 12px; left: 10%; animation-duration: 8s; animation-delay: 0s; }
+        .petal:nth-child(2) { width: 10px; height: 9px; left: 30%; animation-duration: 12s; animation-delay: 2s; }
+        .petal:nth-child(3) { width: 18px; height: 14px; left: 50%; animation-duration: 9s; animation-delay: 4s; }
+        .petal:nth-child(4) { width: 12px; height: 11px; left: 70%; animation-duration: 11s; animation-delay: 1s; }
+        .petal:nth-child(5) { width: 16px; height: 13px; left: 85%; animation-duration: 7s; animation-delay: 5s; }
+
+        /* إطار صورة العرسان الملكي البيضاوي التفاعلي */
         .couple-frame-wrapper {
             position: absolute;
-            top: 250px; /* تقع بالظبط فوق منطقة الدبلتين والأسماء في التصميم الخلفي */
+            top: 240px;
             left: 50%;
             transform: translateX(-50%);
-            width: 155px;
-            height: 210px;
-            border: 3px solid var(--gold-solid);
-            border-radius: 50% / 40%; /* تصميم بيضاوي ملكي راقٍ */
+            width: 160px;
+            height: 215px;
+            border: 4px solid var(--gold-solid);
+            border-radius: 50% / 40%;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 0 15px rgba(191,161,95,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             background: #fff;
             z-index: 5;
+            animation: gentleGlow 3s infinite ease-in-out;
+        }
+
+        @keyframes gentleGlow {
+            0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+            50% { box-shadow: 0 8px 30px rgba(191,161,95,0.5); border-color: #dfc48c; }
         }
 
         .couple-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top; /* يركز الـ Crop على الوجوه بامتياز */
+            object-position: center top;
+        }
+
+        /* باقات الورد الديجيتال المدمجة في أركان الكارت مع أنيميشن نبض خفيف جداً */
+        .floral-corner-top {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 140px;
+            height: 140px;
+            opacity: 0.85;
+            z-index: 2;
+            transform-origin: top right;
+            animation: breathingFloral 4s infinite ease-in-out;
+        }
+
+        @keyframes breathingFloral {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        /* محتوى الدعوة الكلاسيكي المطابق */
+        .card-content-static {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .basmala {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .main-title {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .invitation-phrase {
+            font-size: 1.1rem;
+            color: #444;
+            margin-top: 10px;
+            font-weight: 600;
         }
 
         /* حاوية الأزرار التفاعلية والعداد التنازلي المدمجة */
@@ -311,6 +413,19 @@
             font-family: 'Cairo', sans-serif;
             z-index: 10;
         }
+
+        /* تفاصيل النص السفلي الثابت المندمج */
+        .bottom-details-text {
+            z-index: 3;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .text-bold-royal {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 4px 0;
+        }
     </style>
 </head>
 <body>
@@ -326,13 +441,47 @@
         <div class="hint-text">اضغط على البوابة الملكية للدخول واكتشاف الفرحة 🚪✨</div>
     </div>
 
-    <!-- ٢. كارت الدعوة بمظهر خلفية الصورة الأصلية وصورة العرسان المنورة -->
+    <!-- ٢. كارت الدعوة بمظهر خلفية مدمجة بالكامل مع أنيميشن ورود متساقطة -->
     <div class="card-container" id="cardContainer">
         <div class="card">
             
-            <!-- إطار صورة العرسان الملكي الفاخر المندمج وسط الكارت -->
+            <!-- حاوية البتلات المتساقطة التفاعلية -->
+            <div class="petals-container">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+            </div>
+
+            <!-- باقة ورد ديجيتال SVG مدمجة بالأركان لإعطاء روح الصورة تماماً وبجودة حادة -->
+            <svg class="floral-corner-top" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="90" cy="10" r="30" fill="#fecdd3" opacity="0.6"/>
+                <circle cx="70" cy="25" r="20" fill="#ffe4e6" opacity="0.7"/>
+                <path d="M50 10C60 25 80 20 90 40" stroke="#bfa15f" stroke-width="2" stroke-linecap="round"/>
+                <path d="M70 5C75 15 85 12 95 22" stroke="#bfa15f" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+
+            <!-- النصوص العلوية الفاخرة المندمجة بالبرواز -->
+            <div class="card-content-static">
+                <div class="basmala">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+                <div class="main-title">دعوة زفاف</div>
+                <div class="invitation-phrase">يتشرفان بدعوتكم لحضور حفل زفافهما</div>
+            </div>
+
+            <!-- إطار صورة العرسان الملكي البيضاوي المحاط بلمعة هادئة -->
             <div class="couple-frame-wrapper">
                 <img src="couple.jpg" class="couple-img" alt="العرسان">
+            </div>
+
+            <!-- النصوص والتفاصيل المندمجة بقلب الكارت الخلفي -->
+            <div class="bottom-details-text">
+                <div class="text-bold-royal" style="font-family: 'Amiri', serif; font-size: 2.3rem; color: #9d7a36; margin-bottom: 10px;">أمنية & غانم</div>
+                <div class="text-bold-royal">التاريخ: الجمعة، ١٤ أغسطس ٢٠٢٦ م</div>
+                <div class="text-bold-royal">المكان: qاعة البانسيه للاحتفالات</div>
+                <div style="font-size: 0.9rem; color: #444; font-weight: 600; margin-bottom: 10px;">(طريق الملك عبد العزيز)</div>
+                <div style="font-family: 'Amiri', serif; font-size: 1.3rem; font-weight: 700;">حضوركم يسعدنا ويزيد فرحتنا</div>
+                <div style="font-size: 1rem; font-weight: 600;">يبدأ الحفل في تمام الساعة ٩:٠٠ مساءً</div>
             </div>
 
             <!-- المنطقة التفاعلية السفلية المدمجة بذكاء فوق خلفية الكارت -->
@@ -426,34 +575,4 @@
         // حفظ الموعد بالتقويم الذكي (الجمعة 14 أغسطس 2026 الساعة 9 م بمصر)
         addToCalendar.addEventListener('click', function() {
             const title = encodeURIComponent("حفل زفاف غانم & أمنية 🤵‍♂️👰‍♀️");
-            const details = encodeURIComponent("يسعدنا ويشرفنا حضوركم حفل زفافنا لتكتمل فرحتنا بكم. ودامت دياركم عامرة بالأفراح ✨");
-            const location = encodeURIComponent("قاعة البانسيه للاحتفالات");
-            const dates = "20260814T190000Z/20260814T220000Z";
-
-            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sf=true&output=xml`;
-            window.open(calendarUrl, '_blank');
-        });
-
-        // العداد التنازلي ليوم 14 أغسطس 2026 الساعة 21:00
-        const weddingDate = new Date("August 14, 2026 21:00:00").getTime();
-
-        const timer = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("countdown").innerHTML = "<b style='color:var(--gold-solid); font-size:1.1rem;'>🔥 الفرح شغال الآن.. منورين يا حبايب! 🔥</b>";
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+            const details = encodeURIComponent("يسعدنا ويشرفنا حضوركم حفل زفافنا لتكتمل فرحتنا بكم. ودامت ديار
