@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف: غانم & أمنية</title>
+    <!-- الخطوط الملكية المستخدمة في التصميم -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark: #2c1a19;
+            --gold-solid: #bfa15f;
+            --bg-floral: #fdf5f2; /* نفس الدرجة الروز الناعمة والأوف وايت اللي في الصورة */
+            --whatsapp-color: #25d366;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f7f3ed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            perspective: 1500px;
+        }
+
+        /* --- شاشة البوابة التفاعلية --- */
+        .door-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #140b0a 0%, #2c1a19 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        .door-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .door-title {
+            color: #fcf6ba;
+            font-family: 'Reem Kufi', serif;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            padding: 0 20px;
+        }
+
+        .door-frame {
+            width: 210px;
+            height: 340px;
+            border: 4px solid #bfa15f;
+            border-bottom: none;
+            border-radius: 100px 100px 0 0;
+            position: relative;
+            background: #1c100f;
+            box-shadow: 0 0 35px rgba(197, 160, 89, 0.3);
+            cursor: pointer;
+            z-index: 1010;
+        }
+
+        .door {
+            width: 100%;
+            height: 100%;
+            background: #2c1a19;
+            border-radius: 96px 96px 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: left center;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #140b0a;
+            pointer-events: none;
+        }
+
+        .door.open {
+            transform: rotateY(-120deg);
+        }
+
+        .door-knob {
+            width: 38px;
+            height: 38px;
+            background: radial-gradient(circle, #fcf6ba 0%, #aa771c 100%);
+            border-radius: 50%;
+            position: absolute;
+            right: 18px;
+            top: 55%;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .door-knob::after {
+            content: '✊';
+            font-size: 15px;
+            animation: knockBounce 1s infinite;
+        }
+
+        @keyframes knockBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hint-text {
+            color: #fdfbf7;
+            margin-top: 35px;
+            font-size: 1.1rem;
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* --- تصميم كارت الدعوة المطابق للصورة تماماً --- */
+        .card-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: all 1s ease 0.2s;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .card-container.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .card {
+            background: linear-gradient(180deg, #fffcfb 0%, #fef5f2 50%, #fffcfb 100%); /* نفس تدرج الخلفية الروز الهادئ */
+            padding: 45px 30px;
+            border-radius: 0px; /* تصميم كلاسيكي مستقيم مثل الصورة */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 12px double var(--gold-solid); /* البرواز الذهبي المزدوج الفخم المحيط بالدعوة */
+        }
+
+        /* باقات الورد العلوية والسفلية (مطابقة لأركان الصورة) */
+        .floral-top {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 85px;
+            background: url('https://i.ibb.co/6bsfNf0/floral-top.png') no-repeat center top;
+            background-size: contain;
+            opacity: 0.95;
+            pointer-events: none;
+        }
+
+        /* بديل ذكي للورد عالي الجودة لضمان ظهوره فورا في الأركان */
+        .card::before {
+            content: '🌸🍃';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 28px;
+            opacity: 0.3;
+        }
+        .card::after {
+            content: '🍃🌸';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 28px;
+            opacity: 0.3;
+        }
+
+        /* البسملة ونوع الدعوة بالخط العربي الملكي */
+        .basmala {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 25px 0 5px 0;
+            color: var(--primary-dark);
+        }
+
+        .main-title {
+            font-family: 'Amiri', serif;
+            font-size: 2.6rem;
+            color: var(--primary-dark);
+            margin: 0 0 10px 0;
+            font-weight: 400;
+        }
+
+        /* --- تصميم الدبلتين الذهبيتين المتداخلتين بداخلهم الأسماء (نفس الصورة بالظبط) --- */
+        .rings-container {
+            position: relative;
+            width: 100%;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .rings-svg {
+            position: absolute;
+            width: 280px;
+            height: 140px;
+            z-index: 1;
+        }
+
+        .names-inside-rings {
+            position: relative;
+            z-index: 2;
+            font-family: 'Amiri', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #9d7a36; /* اللون الذهبي البني الرفيع المكتوب بيه الأسماء */
+            display: flex;
+            gap: 35px; /* لتوزيع الأسماء بدقة داخل كل دبلة */
+            align-items: center;
+            margin-top: -5px;
+        }
+
+        .ampersand {
+            font-size: 1.8rem;
+            color: var(--gold-solid);
+            font-weight: 400;
+        }
+
+        /* نصوص تفاصيل الفرح بنفس الصياغة والترتيب الجمالي */
+        .invitation-phrase {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.15rem;
+            color: #333;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .details-wrapper {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .detail-line {
+            font-size: 1.25rem;
+            margin: 10px 0;
+            color: #000;
+            font-weight: 700;
+        }
+        
+        .detail-line strong {
+            color: var(--primary-dark);
+        }
+
+        .sub-details {
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: -5px;
+            font-weight: 400;
+        }
+
+        .attendance-phrase {
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 15px 0 5px 0;
+        }
+
+        .start-time {
+            font-size: 1.1rem;
+            color: #000;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* الأزرار التفاعلية (الموقع والتقويم) تحت التفاصيل مباشرة */
+        .utility-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .util-btn {
+            flex: 1;
+            padding: 9px;
+            border: 1px solid var(--gold-solid);
+            border-radius: 4px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #000;
+            background: #fffdfb;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .util-btn:hover {
+            background: var(--gold-solid);
+            color: #fff;
+        }
+
+        /* عداد تنازلي مدمج أنيق */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .countdown-item {
+            background: #fff;
+            border: 1px solid #e2d1bc;
+            padding: 6px;
+            border-radius: 4px;
+            min-width: 55px;
+        }
+        .countdown-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: block;
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        /* قائمة تسجيل الحضور المربوطة بالواتس */
+        .rsvp-section {
+            border-top: 1px dashed var(--gold-solid);
+            margin-top: 20px;
+            padding-top: 15px;
+        }
+
+        .rsvp-section input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            text-align: right;
+            outline: none;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25d366 0%, #1ebd58 100%);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 4px 10px rgba(37,211,102,0.2);
+        }
+
+        .music-btn {
+            background: transparent;
+            color: #666;
+            border: none;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 12px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ١. شاشة البوابة التفاعلية الفخمة للـ 3D Opening -->
+    <div class="door-screen" id="doorScreen">
+        <div class="door-title">فرحة غانم & أمنية بتناديك.. ✨</div>
+        <div class="door-frame" id="doorFrame">
+            <div class="door" id="mainDoor">
+                <div class="door-knob"></div>
+            </div>
+        </div>
+        <div class="hint-text">اضغط على البوابة الملكية للدخول واكتشاف الفرحة 🚪✨</div>
+    </div>
+
+    <!-- ٢. كارت الدعوة الرئيسي المطابق للصورة واللوكيشن والتقويم والواتس -->
+    <div class="card-container" id="cardContainer">
+        <div class="card">
+            <!-- الورد العلوي المتناسق -->
+            <div class="floral-top"></div>
+
+            <div class="basmala">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="main-title">دعوة زفاف</div>
+            
+            <div class="invitation-phrase">يتشرفان بدعوتكم لحضور حفل زفافهما</div>
+
+            <!-- تفصيل الدبلتين المتداخلتين والأسماء بداخلهم بدقة متناهية هندسية -->
+            <div class="rings-container">
+                <svg class="rings-svg" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- الدبلة اليسرى -->
+                    <circle cx="75" cy="50" r="38" stroke="#d4af37" stroke-width="3" fill="none" filter="drop-shadow(1px 1px 2px rgba(0,0,0,0.15))"/>
+                    <circle cx="75" cy="50" r="35" stroke="#fcf6ba" stroke-width="1" fill="none"/>
+                    <!-- الدبلة اليمنى المتداخلة معها -->
+                    <circle cx="125" cy="50" r="38" stroke="#d4af37" stroke-width="3" fill="none" filter="drop-shadow(1px 1px 2px rgba(0,0,0,0.15))"/>
+                    <circle cx="125" cy="50" r="35" stroke="#fcf6ba" stroke-width="1" fill="none"/>
+                    <!-- زهور زينة صغيرة حول الدبل كما بالصورة -->
+                    <circle cx="40" cy="30" r="2" fill="#e8a7a1"/>
+                    <circle cx="160" cy="70" r="2" fill="#e8a7a1"/>
+                </svg>
+                <div class="names-inside-rings">
+                    <div>أمنية</div>
+                    <div class="ampersand">&</div>
+                    <div>غانم</div>
+                </div>
+            </div>
+
+            <!-- تفاصيل الميعاد والمكان مطابقة بالملي للصورة والمعطيات المحدثة -->
+            <div class="details-wrapper">
+                <div class="detail-line">التاريخ: الجمعة، ١٤ أغسطس ٢٠٢٦ م</div>
+                <div class="detail-line">المكان: قاعة البانسيه للاحتفالات</div>
+                <div class="sub-details">(طريق الملك عبد العزيز)</div>
+            </div>
+
+            <!-- أزرار الخدمات الذكية (اللوكيشن المرسل + تقويم جوجل) تحت تفاصيل القاعة مباشرة -->
+            <div class="utility-buttons">
+                <a href="https://maps.app.goo.gl/YF9dQeiMW2N1r1J47?g_st=ac" target="_blank" class="util-btn">
+                    📍 موقع القاعة بالخريطة
+                </a>
+                <button id="addToCalendar" class="util-btn">
+                    🔔 تذكير على التقويم
+                </button>
+            </div>
+
+            <!-- متبقي على الفرح (عداد تنازلي شيك ومدمج) -->
+            <div class="countdown" id="countdown">
+                <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">يوم</span></div>
+                <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">ساعة</span></div>
+                <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">دقيقة</span></div>
+            </div>
+
+            <div class="attendance-phrase">حضوركم يسعدنا ويزيد فرحتنا</div>
+            <div class="start-time">يبدأ الحفل في تمام الساعة ٩:٠٠ مساءً</div>
+
+            <!-- تأكيد الحضور الذكي المربوط برقم الواتس آب المباشر -->
+            <div class="rsvp-section">
+                <input type="text" id="visitorName" placeholder="اكتب اسمك الكريم هنا لتأكيد الحضور...">
+                <button class="whatsapp-btn" id="sendWhatsapp">تأكيد الحضور عبر الواتساب</button>
+            </div>
+
+            <button class="music-btn" id="playBtn">⏸️ إيقاف تشغيل الأغنية (هو حبيبي)</button>
+            
+            <audio id="bgMusic" loop>
+                <source src="asala-howa-habibi.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        const doorFrame = document.getElementById('doorFrame');
+        const mainDoor = document.getElementById('mainDoor');
+        const doorScreen = document.getElementById('doorScreen');
+        const cardContainer = document.getElementById('cardContainer');
+        const music = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        const sendWhatsapp = document.getElementById('sendWhatsapp');
+        const addToCalendar = document.getElementById('addToCalendar');
+
+        // كود تشغيل أنيميشن البوابة والفتح الفوري واللحن
+        doorFrame.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mainDoor.classList.add('open');
+            music.play().catch(err => console.log("تطلب تفاعل يدوي للصوت"));
+
+            setTimeout(() => {
+                doorScreen.classList.add('fade-out');
+                cardContainer.classList.add('show');
+                document.body.style.overflow = 'auto';
+            }, 400);
+        });
+
+        // زرار الموسيقى
+        playBtn.addEventListener('click', function() {
+            if (music.paused) {
+                music.play().then(() => playBtn.innerHTML = "⏸️ إيقاف تشغيل الأغنية (هو حبيبي)");
+            } else {
+                music.pause();
+                playBtn.innerHTML = "🎵 تشغيل الأغنية (هو حبيبي)";
+            }
+        });
+
+        // كود تأكيد الحضور واتساب للرقم المحدد
+        sendWhatsapp.addEventListener('click', function() {
+            const visitorName = document.getElementById('visitorName').value.trim();
+            const phoneNumber = "201013403675";
+            
+            if (visitorName === "") {
+                alert("برجاء تسجيل اسمك أولاً لتأكيد الحضور الكرام! ✍️✨");
+                return;
+            }
+
+            const message = `السلام عليكم ورحمة الله وبركاته،\n\nأنا: *${visitorName}*\nيسعدني جداً تلبية الدعوة وتأكيد حضوري لفرح (غانم & أمنية) يوم الجمعة الموافق 14/8/2026 في قاعة البانسيه للاحتفالات.\n\nألف مبروك وعقبال الليلة الكبيرة! 🤵‍♂️👰‍♀️✨`;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // كود إضافة الحدث لتقويم جوجل الذكي لـ 14 أغسطس 2026 الساعة 9 مساءً بمصر
+        addToCalendar.addEventListener('click', function() {
+            const title = encodeURIComponent("حفل زفاف غانم & أمنية 🤵‍♂️👰‍♀️");
+            const details = encodeURIComponent("يسعدنا ويشرفنا حضوركم حفل زفافنا لتكتمل فرحتنا بكم. ودامت دياركم عامرة بالأفراح ✨");
+            const location = encodeURIComponent("قاعة البانسيه للاحتفالات");
+            const dates = "20260814T190000Z/20260814T220000Z"; // متوافقة تماماً مع الـ 9 مساءً بمصر
+
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}&sf=true&output=xml`;
+            window.open(calendarUrl, '_blank');
+        });
+
+        // العداد التنازلي الذكي لتاريخ 14 أغسطس 2026 الساعة 21:00
+        const weddingDate = new Date("August 14, 2026 21:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<b style='color:var(--gold-solid); font-size:1.1rem;'>🔥 الفرح شغال الآن.. منورين يا حبايب! 🔥</b>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
