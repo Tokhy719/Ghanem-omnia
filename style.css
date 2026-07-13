@@ -1,0 +1,146 @@
+/*
+  Wedding-Invitation — Standalone CSS companion
+  Main styles live in src/index.css (Vite + Tailwind).
+  This file documents the design tokens for GitHub Pages / static reference.
+*/
+
+:root {
+  --gold: #d4af37;
+  --gold-light: #f5e6a8;
+  --gold-dark: #b8860b;
+  --gold-shine: #ffd700;
+  --cream: #fffaf0;
+  --bg-deep: #1a1208;
+  --text-dark: #2c2416;
+  --text-soft: #5c4a32;
+}
+
+/* Glassmorphism utility (standalone) */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(212, 175, 55, 0.08) 100%
+  );
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.glass-strong {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 250, 240, 0.25) 40%,
+    rgba(245, 230, 168, 0.15) 100%
+  );
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #f5e6a8 0%, #d4af37 40%, #ffd700 60%, #b8860b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #1a1208;
+  background: linear-gradient(135deg, #f5e6a8 0%, #d4af37 50%, #b8860b 100%);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(184, 134, 11, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #fffaf0;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  cursor: pointer;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.btn-glass:hover {
+  transform: translateY(-2px);
+  background: rgba(212, 175, 55, 0.2);
+}
+
+/* Falling roses */
+@keyframes fallRose {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Golden sparkles */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Heart pulse */
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.25);
+  }
+  30% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-gold,
+  .btn-glass {
+    width: 100%;
+  }
+}
