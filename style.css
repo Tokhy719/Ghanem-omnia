@@ -1,0 +1,173 @@
+/* 
+   Luxurious White & Gold Wedding Invitation Style Sheet
+   Developed with premium Glassmorphism and elegant transitions.
+*/
+
+/* Core CSS & Themes */
+:root {
+    --gold-primary: #dfba6b;
+    --gold-secondary: #c49e4d;
+    --gold-light: #f5eccf;
+    --text-dark: #3d3321;
+    --text-muted: #8c7b60;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(223, 186, 107, 0.25);
+}
+
+/* Base Body Styles */
+body {
+    background: radial-gradient(circle at center, #ffffff 0%, #f9f6ef 70%, #f1ebe0 100%);
+    min-height: 100vh;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-dark);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #fbf9f4;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gold-primary);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-secondary);
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 50px rgba(223, 186, 107, 0.12);
+}
+
+/* Pulse animation for the trigger button */
+.pulse-button {
+    box-shadow: 0 0 0 0 rgba(223, 186, 107, 0.7);
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(223, 186, 107, 0.5);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 15px rgba(223, 186, 107, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(223, 186, 107, 0);
+    }
+}
+
+/* Music floating button waves */
+#music-toggle {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#music-toggle.playing {
+    border-color: var(--gold-primary);
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(223, 186, 107, 0.4);
+}
+
+#music-toggle.playing i {
+    display: none;
+}
+
+.music-wave-bar {
+    display: none;
+    width: 3px;
+    height: 15px;
+    background-color: var(--gold-primary);
+    margin: 0 1.5px;
+    border-radius: 3px;
+}
+
+#music-toggle.playing .music-wave-bar {
+    display: inline-block;
+}
+
+#music-toggle.playing .bar-1 {
+    animation: wave-motion 1.2s ease-in-out infinite alternate;
+}
+#music-toggle.playing .bar-2 {
+    animation: wave-motion 0.8s ease-in-out infinite alternate-reverse;
+    animation-delay: 0.15s;
+}
+#music-toggle.playing .bar-3 {
+    animation: wave-motion 1.0s ease-in-out infinite alternate;
+    animation-delay: 0.3s;
+}
+
+@keyframes wave-motion {
+    0% {
+        height: 4px;
+    }
+    100% {
+        height: 20px;
+    }
+}
+
+/* Cinematic Slide-out Card Shadows & Styles */
+.gold-glow-hover {
+    transition: all 0.3s ease;
+}
+.gold-glow-hover:hover {
+    box-shadow: 0 10px 25px rgba(223, 186, 107, 0.25);
+    border-color: var(--gold-primary);
+}
+
+/* Elegant Text Styling for Titles */
+.gradient-text-gold {
+    background: linear-gradient(135deg, #3d3321 0%, #c49e4d 50%, #3d3321 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Background elements & decorative overlays */
+#envelope-screen {
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(245, 236, 207, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(245, 236, 207, 0.15) 0%, transparent 40%);
+}
+
+#invitation-screen {
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(245, 236, 207, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(245, 236, 207, 0.18) 0%, transparent 50%);
+}
+
+/* Media Queries for Mobile Fine-Tuning */
+@media (max-width: 640px) {
+    .pulse-button {
+        width: 12h;
+        height: 12h;
+    }
+    #three-container {
+        height: 55vh;
+    }
+}
+
+/* Subtle keyframe animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
