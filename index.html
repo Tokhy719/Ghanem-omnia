@@ -3,576 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة زفاف: غانم & أمنية</title>
-    <!-- خطوط جوجل الشيك والملكية -->
+    <title>دعوة زفاف غانم ❤️ أمنية</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-dark: #2c1a19;
-            --gold-solid: #bfa15f;
-            --whatsapp-color: #25d366;
-            --rose-petal: #ffb7b2;
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f5f0eb;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            perspective: 1500px;
-        }
-
-        /* --- شاشة البوابة التفاعلية --- */
-        .door-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #140b0a 0%, #2c1a19 100%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        .door-screen.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .door-title {
-            color: #fcf6ba;
-            font-family: 'Reem Kufi', serif;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            padding: 0 20px;
-        }
-
-        .door-frame {
-            width: 210px;
-            height: 340px;
-            border: 4px solid #bfa15f;
-            border-bottom: none;
-            border-radius: 100px 100px 0 0;
-            position: relative;
-            background: #1c100f;
-            box-shadow: 0 0 35px rgba(197, 160, 89, 0.3);
-            cursor: pointer;
-            z-index: 1010;
-        }
-
-        .door {
-            width: 100%;
-            height: 100%;
-            background: #2c1a19;
-            border-radius: 96px 96px 0 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform-origin: left center;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #140b0a;
-            pointer-events: none;
-        }
-
-        .door.open {
-            transform: rotateY(-120deg);
-        }
-
-        .door-knob {
-            width: 38px;
-            height: 38px;
-            background: radial-gradient(circle, #fcf6ba 0%, #aa771c 100%);
-            border-radius: 50%;
-            position: absolute;
-            right: 18px;
-            top: 55%;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
-        }
-
-        .door-knob::after {
-            content: '✊';
-            font-size: 15px;
-            position: absolute;
-            top: 6px;
-            right: 10px;
-            animation: knockBounce 1s infinite;
-        }
-
-        @keyframes knockBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .hint-text {
-            color: #fdfbf7;
-            margin-top: 35px;
-            font-size: 1.1rem;
-            animation: pulseText 2s infinite;
-        }
-
-        @keyframes pulseText {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* --- الكارت الداخلي بخلفية ديجيتال مميزة وأنيميشن ورود متحركة --- */
-        .card-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            opacity: 0;
-            transform: translateY(20px) scale(0.98);
-            transition: all 1s ease 0.2s;
-            overflow-y: auto;
-            max-height: 100vh;
-        }
-
-        .card-container.show {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .card {
-            background: linear-gradient(180deg, #fffcfb 0%, #fff3f0 50%, #fffcfb 100%);
-            width: 100%;
-            max-width: 430px;
-            height: 820px; 
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            padding: 20px 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            border: 10px double var(--gold-solid);
-            overflow: hidden;
-        }
-
-        /* أنيميشن أوراق الورد المتساقطة الناعمة في الخلفية */
-        .petals-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .petal {
-            position: absolute;
-            background-color: var(--rose-petal);
-            border-radius: 150px 0 150px 150px;
-            opacity: 0.7;
-            animation: floatPetal 10s linear infinite;
-        }
-
-        @keyframes floatPetal {
-            0% {
-                transform: translateY(-20px) translateX(0) rotate(0deg);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translateY(400px) translateX(50px) rotate(180deg);
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(840px) translateX(-30px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* توزيع عشوائي للبتلات بأنيميشن مختلف */
-        .petal:nth-child(1) { width: 15px; height: 12px; left: 10%; animation-duration: 8s; animation-delay: 0s; }
-        .petal:nth-child(2) { width: 10px; height: 9px; left: 30%; animation-duration: 12s; animation-delay: 2s; }
-        .petal:nth-child(3) { width: 18px; height: 14px; left: 50%; animation-duration: 9s; animation-delay: 4s; }
-        .petal:nth-child(4) { width: 12px; height: 11px; left: 70%; animation-duration: 11s; animation-delay: 1s; }
-        .petal:nth-child(5) { width: 16px; height: 13px; left: 85%; animation-duration: 7s; animation-delay: 5s; }
-
-        /* إطار صورة العرسان الملكي البيضاوي التفاعلي */
-        .couple-frame-wrapper {
-            position: absolute;
-            top: 240px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 160px;
-            height: 215px;
-            border: 4px solid var(--gold-solid);
-            border-radius: 50% / 40%;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            background: #fff;
-            z-index: 5;
-            animation: gentleGlow 3s infinite ease-in-out;
-        }
-
-        @keyframes gentleGlow {
-            0%, 100% { box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-            50% { box-shadow: 0 8px 30px rgba(191,161,95,0.5); border-color: #dfc48c; }
-        }
-
-        .couple-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-        }
-
-        /* باقات الورد الديجيتال المدمجة في أركان الكارت مع أنيميشن نبض خفيف جداً */
-        .floral-corner-top {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 140px;
-            height: 140px;
-            opacity: 0.85;
-            z-index: 2;
-            transform-origin: top right;
-            animation: breathingFloral 4s infinite ease-in-out;
-        }
-
-        @keyframes breathingFloral {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-
-        /* محتوى الدعوة الكلاسيكي المطابق */
-        .card-content-static {
-            position: absolute;
-            top: 40px;
-            left: 0;
-            right: 0;
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .basmala {
-            font-family: 'Amiri', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 5px;
-        }
-
-        .main-title {
-            font-family: 'Amiri', serif;
-            font-size: 2.5rem;
-            color: var(--primary-dark);
-            margin: 0;
-            letter-spacing: 1px;
-        }
-
-        .invitation-phrase {
-            font-size: 1.1rem;
-            color: #444;
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
-        /* حاوية الأزرار التفاعلية والعداد التنازلي المدمجة */
-        .interactive-area {
-            background: rgba(255, 252, 248, 0.94); 
-            border: 1px solid rgba(191, 161, 95, 0.35);
-            border-radius: 18px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            backdrop-filter: blur(6px);
-            z-index: 6;
-        }
-
-        .countdown-title {
-            font-size: 0.85rem;
-            color: #555;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .countdown-item {
-            background: #ffffff;
-            border: 1px solid #e2d1bc;
-            padding: 5px;
-            border-radius: 6px;
-            min-width: 52px;
-            text-align: center;
-        }
-
-        .countdown-number {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.65rem;
-            color: #777;
-        }
-
-        .utility-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .util-btn {
-            flex: 1;
-            padding: 9px;
-            border: 1px solid var(--gold-solid);
-            border-radius: 20px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #2c1a19;
-            background: #ffffff;
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .util-btn:hover {
-            background: var(--primary-dark);
-            color: #fff;
-            border-color: var(--primary-dark);
-        }
-
-        .rsvp-section input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            text-align: right;
-            outline: none;
-            background: #fff;
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25d366 0%, #1ebd58 100%);
-            color: #fff;
-            border: none;
-            padding: 11px;
-            font-size: 0.95rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 700;
-            width: 100%;
-            font-family: 'Cairo', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 12px rgba(37,211,102,0.2);
-        }
-
-        .music-btn {
-            background: transparent;
-            color: #888;
-            border: none;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-top: 5px;
-            text-decoration: underline;
-            font-family: 'Cairo', sans-serif;
-            z-index: 10;
-        }
-
-        /* تفاصيل النص السفلي الثابت المندمج */
-        .bottom-details-text {
-            z-index: 3;
-            margin-bottom: 15px;
-            color: #000;
-        }
-
-        .text-bold-royal {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 4px 0;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ١. شاشة البوابة التفاعلية الفخمة للـ 3D Opening -->
-    <div class="door-screen" id="doorScreen">
-        <div class="door-title">فرحة غانم & أمنية بتناديك.. ✨</div>
-        <div class="door-frame" id="doorFrame">
-            <div class="door" id="mainDoor">
-                <div class="door-knob"></div>
-            </div>
-        </div>
-        <div class="hint-text">اضغط على البوابة الملكية للدخول واكتشاف الفرحة 🚪✨</div>
-    </div>
-
-    <!-- ٢. كارت الدعوة بمظهر خلفية مدمجة بالكامل مع أنيميشن ورود متساقطة -->
-    <div class="card-container" id="cardContainer">
-        <div class="card">
-            
-            <!-- حاوية البتلات المتساقطة التفاعلية -->
-            <div class="petals-container">
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-                <div class="petal"></div>
-            </div>
-
-            <!-- باقة ورد ديجيتال SVG مدمجة بالأركان لإعطاء روح الصورة تماماً وبجودة حادة -->
-            <svg class="floral-corner-top" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="90" cy="10" r="30" fill="#fecdd3" opacity="0.6"/>
-                <circle cx="70" cy="25" r="20" fill="#ffe4e6" opacity="0.7"/>
-                <path d="M50 10C60 25 80 20 90 40" stroke="#bfa15f" stroke-width="2" stroke-linecap="round"/>
-                <path d="M70 5C75 15 85 12 95 22" stroke="#bfa15f" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-
-            <!-- النصوص العلوية الفاخرة المندمجة بالبرواز -->
-            <div class="card-content-static">
-                <div class="basmala">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                <div class="main-title">دعوة زفاف</div>
-                <div class="invitation-phrase">يتشرفان بدعوتكم لحضور حفل زفافهما</div>
-            </div>
-
-            <!-- إطار صورة العرسان الملكي البيضاوي المحاط بلمعة هادئة -->
-            <div class="couple-frame-wrapper">
-                <img src="couple.jpg" class="couple-img" alt="العرسان">
-            </div>
-
-            <!-- النصوص والتفاصيل المندمجة بقلب الكارت الخلفي -->
-            <div class="bottom-details-text">
-                <div class="text-bold-royal" style="font-family: 'Amiri', serif; font-size: 2.3rem; color: #9d7a36; margin-bottom: 10px;">أمنية & غانم</div>
-                <div class="text-bold-royal">التاريخ: الجمعة، ١٤ أغسطس ٢٠٢٦ م</div>
-                <div class="text-bold-royal">المكان: qاعة البانسيه للاحتفالات</div>
-                <div style="font-size: 0.9rem; color: #444; font-weight: 600; margin-bottom: 10px;">(طريق الملك عبد العزيز)</div>
-                <div style="font-family: 'Amiri', serif; font-size: 1.3rem; font-weight: 700;">حضوركم يسعدنا ويزيد فرحتنا</div>
-                <div style="font-size: 1rem; font-weight: 600;">يبدأ الحفل في تمام الساعة ٩:٠٠ مساءً</div>
-            </div>
-
-            <!-- المنطقة التفاعلية السفلية المدمجة بذكاء فوق خلفية الكارت -->
-            <div class="interactive-area">
-                
-                <!-- متبقي على الفرح (عداد تنازلي) -->
-                <div class="countdown-title">⏳ متبقي على ليلة العمر:</div>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">يوم</span></div>
-                    <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">ساعة</span></div>
-                    <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">دقيقة</span></div>
-                </div>
-
-                <!-- أزرار الخريطة والتقويم الذكي -->
-                <div class="utility-buttons">
-                    <a href="https://maps.app.goo.gl/YF9dQeiMW2N1r1J47?g_st=ac" target="_blank" class="util-btn">
-                        📍 لوكيشن القاعة
-                    </a>
-                    <button id="addToCalendar" class="util-btn">
-                        🔔 حفظ بالتقويم
-                    </button>
-                </div>
-
-                <!-- تأكيد الحضور المربوط فوراً بالواتساب -->
-                <div class="rsvp-section">
-                    <input type="text" id="visitorName" placeholder="اكتب اسمك الكريم لتأكيد حضورك...">
-                    <button class="whatsapp-btn" id="sendWhatsapp">تأكيد الحضور عبر الواتساب</button>
-                </div>
-
-            </div>
-
-            <!-- زر تشغيل وإيقاف الأغنية الأصلي -->
-            <center>
-                <button class="music-btn" id="playBtn">⏸️ إيقاف لحن الفرح (هو حبيبي)</button>
-            </center>
-            
-            <audio id="bgMusic" loop>
-                <source src="asala-howa-habibi.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-    </div>
-
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        const doorFrame = document.getElementById('doorFrame');
-        const mainDoor = document.getElementById('mainDoor');
-        const doorScreen = document.getElementById('doorScreen');
-        const cardContainer = document.getElementById('cardContainer');
-        const music = document.getElementById('bgMusic');
-        const playBtn = document.getElementById('playBtn');
-        const sendWhatsapp = document.getElementById('sendWhatsapp');
-        const addToCalendar = document.getElementById('addToCalendar');
-
-        // كود تشغيل البوابة
-        doorFrame.addEventListener('click', function(e) {
-            e.stopPropagation();
-            mainDoor.classList.add('open');
-            music.play().catch(err => console.log("تطلب تفاعل صوتي"));
-
-            setTimeout(() => {
-                doorScreen.classList.add('fade-out');
-                cardContainer.classList.add('show');
-                document.body.style.overflow = 'auto';
-            }, 400);
-        });
-
-        // تحكم الموسيقى
-        playBtn.addEventListener('click', function() {
-            if (music.paused) {
-                music.play().then(() => playBtn.innerHTML = "⏸️ إيقاف لحن الفرح (هو حبيبي)");
-            } else {
-                music.pause();
-                playBtn.innerHTML = "🎵 تشغيل لحن الفرح (هو حبيبي)";
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        cairo: ['Cairo', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    }
+                }
             }
-        });
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#fcfbf7] overflow-x-hidden font-cairo select-none">
+    <audio id="bg-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
 
-        // تأكيد الحضور عبر الواتس آب للرقم المخصص
-        sendWhatsapp.addEventListener('click', function() {
-            const visitorName = document.getElementById('visitorName').value.trim();
-            const phoneNumber = "201013403675";
-            
-            if (visitorName === "") {
-                alert("برجاء تسجيل اسمك الكريم أولاً لتأكيد حضورك ومشاركتنا فرحتنا! ✍️✨");
-                return;
-            }
+    <canvas id="rose-petals-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-40"></canvas>
+    <canvas id="sparkles-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-30"></canvas>
+    <canvas id="fireworks-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50"></canvas>
 
-            const message = `السلام عليكم ورحمة الله وبركاته،\n\nأنا: *${visitorName}*\nيسعدني جداً تلبية الدعوة وتأكيد حضوري لحفل زفاف *غانم & أمنية* يوم الجمعة 14/8/2026 في قاعة البانسيه للاحتفالات.\n\nألف مبروك ودامت دياركم عامرة بالأفراح! 🤵‍♂️👰‍♀️✨`;
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        });
+    <button id="music-toggle" class="fixed top-5 right-5 z-50 w-12 h-12 bg-white/80 backdrop-blur-md border border-[#dfba6b]/40 rounded-full flex items-center justify-center text-[#dfba6b] shadow-lg hover:bg-white hover:text-[#c49e4d] transition-all duration-300">
+        <i id="music-icon" class="fas fa-music text-lg"></i>
+        <span class="music-wave-bar bar-1"></span>
+        <span class="music-wave-bar bar-2"></span>
+        <span class="music-wave-bar bar-3"></span>
+    </button>
 
-        // حفظ الموعد بالتقويم الذكي (الجمعة 14 أغسطس 2026 الساعة 9 م بمصر)
-        addToCalendar.addEventListener('click', function() {
-            const title = encodeURIComponent("حفل زفاف غانم & أمنية 🤵‍♂️👰‍♀️");
-            const details = encodeURIComponent("يسعدنا ويشرفنا حضوركم حفل زفافنا لتكتمل فرحتنا بكم. ودامت ديار
+    <div id="envelope-screen" class="fixed inset-0 w-full h-full flex flex-col items-center justify-center bg-radial from-[#ffffff] to-[#f3efe6] z-40 transition-opacity duration-1000">
+        <div id="three-container" class="w-full h-[60vh] md:h-[70vh] relative cursor-pointer"></div>
+        <div id="opener-hint" class="absolute bottom-16 flex flex-col items-center gap-3 text-center pointer-events-none z-10 px-4">
+            <span class="text-xs tracking-[0.2em] text-[#dfba6b] uppercase font-semibold">بكل حب ندعوكم</span>
+            <h1 class="text-3xl md:text-4xl font-amiri text-[#3d3321] font-bold mt-1">حفل زفاف غانم & أمنية</h1>
+            <p class="text-sm text-[#8c7b60] max-w-xs mt-1">اضغط على الظرف ثلاثي الأبعاد لفتحه ومشاهدة بطاقة الدعوة</p>
+            <div class="mt-4 flex items-center justify-center">
+                <div class="pulse-button flex items-center justify-center bg-white/90 shadow-xl border border-[#dfba6b]/50 rounded-full w-14 h-14 cursor-pointer pointer-events-auto" id="click-trigger">
+                    <i class="fas fa-envelope-open text-[#dfba6b] text-xl animate-bounce"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="invitation-screen" class="min-h-screen w-full py-16 px-4 md:px-8 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-1000 z-10 relative">
+        <div class="max-w-3xl w-full mx-auto relative z-20">
+            <div class="bg-white/80 backdrop-blur-xl border-2 border-[#dfba6b]/30 rounded-3xl p-8 md:p-12 shadow-[0_20px_50px_rgba(223,186,107,0.15)] text-center relative overflow-hidden">
+                <div class="absolute inset-4 border border-[#dfba6b]/25 rounded-2xl pointer-events-none"></div>
+                <div class="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-[#dfba6b]/40 pointer-events-none"></div>
+                <div class="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-[#dfba6b]/40 pointer-events-none"></div>
+                <div class="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-[#dfba6b]/40 pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-[#dfba6b]/40 pointer-events-none"></div>
+
+                <div class="mb-6 flex justify-center">
+                    <img src="https://api.iconify.design/solar:heart-bold.svg?color=%23dfba6b" class="w-8 h-8 animate-pulse text-[#dfba6b]" alt="Heart icon">
+                </div>
+
+                <p class="font-amiri text-lg md:text-xl text-[#8c7b60] leading-relaxed mb-4 max-w-lg mx-auto">
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ <br>
+                    "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
+                </p>
+
+                <div class="my-6">
+                    <span class="inline-block px-4 py-1 border-y border-[#dfba6b]/50 text-xs md:text-sm text-[#dfba6b] uppercase tracking-widest font-semibold mb-3">دعوة زفاف</span>
+                    <h2 class="font-amiri text-4xl md:text-5xl lg:text-6xl text-[#3d3321] font-bold tracking-wide my-4">
+                        غانم <span class="text-[#dfba6b] text-3xl md:text-4xl inline-block mx-2">❤️</span> أمنية
+                    </h2>
+                </div>
+
+                <hr class="w-24 mx-auto border-[#dfba6b]/30 my-6">
+
+                <p class="font-cairo text-sm md:text-base text-[#5c4e37] leading-loose max-w-xl mx-auto mb-8">
+                    يُشرفنا ويسعدنا دعوتكم لحضور حفل زفافنا البهيج ومشاركتنا فرحة العمر. <br>
+                    وبحضوركم تكتمل بهجتنا وتضاء ليلتنا بالحب والسرور.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl mx-auto mb-10 text-right">
+                    <div class="bg-white/50 backdrop-blur-md border border-[#dfba6b]/20 rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:shadow-md hover:border-[#dfba6b]/40">
+                        <div class="w-12 h-12 bg-[#dfba6b]/10 rounded-full flex items-center justify-center text-[#dfba6b] shrink-0">
+                            <i class="far fa-calendar-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xs text-[#8c7b60] font-semibold">تاريخ الحفل</h3>
+                            <p class="text-base text-[#3d3321] font-bold mt-0.5">الجمعة، 14 أغسطس</p>
+                            <p class="text-xs text-[#a09075]">الساعة 8:00 مساءً</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/50 backdrop-blur-md border border-[#dfba6b]/20 rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:shadow-md hover:border-[#dfba6b]/40">
+                        <div class="w-12 h-12 bg-[#dfba6b]/10 rounded-full flex items-center justify-center text-[#dfba6b] shrink-0">
+                            <i class="fas fa-map-marker-alt text-xl animate-bounce"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xs text-[#8c7b60] font-semibold">مكان الحفل</h3>
+                            <p class="text-base text-[#3d3321] font-bold mt-0.5">قاعة البانسيه</p>
+                            <p class="text-xs text-[#a09075]">أرقى قاعات الزفاف</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-10 max-w-lg mx-auto">
+                    <h4 class="text-[#dfba6b] text-xs font-bold tracking-widest uppercase mb-4">الوقت المتبقي لليلتنا الكبرى</h4>
+                    <div class="grid grid-cols-4 gap-3 md:gap-4 justify-center" id="countdown-timer">
+                        <div class="bg-gradient-to-b from-white/60 to-white/40 backdrop-blur-md border border-[#dfba6b]/20 rounded-xl p-3 md:p-4 text-center">
+                            <span id="days" class="block font-playfair text-2xl md:text-3xl font-bold text-[#3d3321]">00</span>
+                            <span class="text-[10px] md:text-xs text-[#8c7b60] font-semibold">يوم</span>
+                        </div>
+                        <div class="bg-gradient-to-b from-white/60 to-white/40 backdrop-blur-md border border-[#dfba6b]/20 rounded-xl p-3 md:p-4 text-center">
+                            <span id="hours" class="block font-playfair text-2xl md:text-3xl font-bold text-[#3d3321]">00</span>
+                            <span class="text-[10px] md:text-xs text-[#8c7b60] font-semibold">ساعة</span>
+                        </div>
+                        <div class="bg-gradient-to-b from-white/60 to-white/40 backdrop-blur-md border border-[#dfba6b]/20 rounded-xl p-3 md:p-4 text-center">
+                            <span id="minutes" class="block font-playfair text-2xl md:text-3xl font-bold text-[#3d3321]">00</span>
+                            <span class="text-[10px] md:text-xs text-[#8c7b60] font-semibold">دقيقة</span>
+                        </div>
+                        <div class="bg-gradient-to-b from-white/60 to-white/40 backdrop-blur-md border border-[#dfba6b]/20 rounded-xl p-3 md:p-4 text-center">
+                            <span id="seconds" class="block font-playfair text-2xl md:text-3xl font-bold text-[#dfba6b]">00</span>
+                            <span class="text-[10px] md:text-xs text-[#8c7b60] font-semibold">ثانية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                    <a href="https://maps.app.goo.gl/sGaN2qYLtmyBdaar8?g_st=ac" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#dfba6b] to-[#c49e4d] hover:from-[#c49e4d] hover:to-[#dfba6b] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-location-dot"></i>
+                        <span>موقع القاعة (Google Maps)</span>
+                    </a>
+
+                    <a href="https://wa.me/201013403675?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D9%8E%D8%8C%20%D9%8A%D8%B4%D8%B1%D9%81%D9%86%D9%8I%20%D8%AA%D8%A3%D9%83%D9%8A%D8%AF%20%D8%AD%D8%B6%D9%88%D8%B1%20%D8%AD%D9%81%D9%84%20%D8%B2%D9%81%D8%A7%D9%81%20%D8%BA%D8%A7%D9%86%D9%85%20%D9%88%D8%A3%D9%85%D9%86%D9%8A%D8%A9" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 bg-white border-2 border-[#dfba6b] text-[#dfba6b] hover:bg-[#dfba6b]/5 font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>تأكيد الحضور (واتساب)</span>
+                    </a>
+                </div>
+
+                <div class="mt-12 text-xs text-[#a09075] font-light">
+                    <p>فرحتنا تكتمل بكم وبحضوركم الدافئ</p>
+                    <p class="mt-2">تصميم بكل حب لـ غانم & أمنية ❤️</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
